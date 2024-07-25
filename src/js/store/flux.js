@@ -2,9 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			url: 'https://www.swapi.tech/api',
+			favorites:null
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 			getCharacters: async () =>{
 				try{
 					const resp = await fetch(getStore().url+'/people')
@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({people: data.results})
 					console.log(data)
 				} catch(error){
-					console.log("error")
+					console.log("error al obtener datos de personajes con el fetch")
 				}
 			},
 			getPlanets: async () =>{
@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({planets: data.results})
 					console.log(data)
 				} catch(error){
-					console.log("error")
+					console.log("error al obtener datos de planetas con el fetch")
 				}
 			},
 			getVehicles: async () =>{
@@ -32,7 +32,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({vehicles: data.results})
 					console.log(data)
 				} catch(error){
-					console.log("error")
+					console.log("error al obtener datos de vehículos con el fetch")
+				}
+			},
+			getMoreInformation: async (type,uid) =>{
+				try{
+					const resp = await fetch(`${getStore().url}/${type}/${uid}`)
+					const data = await resp.json()
+					setStore({details: data.result})
+					console.log(data)
+				} catch(error){
+					console.log("error al obtener datos detallados")
 				}
 			},
 		}
