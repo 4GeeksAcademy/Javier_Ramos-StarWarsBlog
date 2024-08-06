@@ -3,7 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Prueba } from "./views/prueba";
+import { Pruebac } from "./views/pruebac";
+import { Pruebap } from "./views/pruebap";
+import { Pruebav } from "./views/pruebav";
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -22,7 +25,9 @@ const Layout = () => {
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/prueba/:type/:uid" element={<Prueba />} />
+						<Route path="/pruebac/:type/:uid" element={<Pruebac />} />
+						<Route path="/pruebap/:type/:uid" element={<Pruebap />} />
+						<Route path="/pruebav/:type/:uid" element={<Pruebav />} />
 						<Route path="*" element={<h1 className="text-center">Page not found</h1>} />
 					</Routes>
 					<Footer />

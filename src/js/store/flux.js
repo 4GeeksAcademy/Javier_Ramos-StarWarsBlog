@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			url: 'https://www.swapi.tech/api',
-			favorites:null
+			favorites:["papas","lays","guanchos","patitos"]
 		},
 		actions: {
 			getCharacters: async () =>{
@@ -45,6 +45,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error al obtener datos detallados")
 				}
 			},
+			putInFavorites: (uid)=>{
+				const store = getStore()
+				return setStore({favorites:(t=>[...t,uid])})
+			},
+			deleteFavorite(uid){
+				const store = getStore()
+				const updatedFavorites = store.favorites.filter((a,b)=> b !== uid)
+				return setStore({favorites:(updatedFavorites)})
+			}
 		}
 	};
 };
