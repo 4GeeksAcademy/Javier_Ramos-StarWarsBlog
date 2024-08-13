@@ -50,10 +50,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			putInFavorites: (name)=>{
-				console.log(name)
 				const store = getStore()
 				setStore({...store,favorites:[...store.favorites,name]});
-				console.log(getStore())
 			},
 			deleteFavorite(uid){
 				const store = getStore()
