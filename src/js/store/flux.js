@@ -2,14 +2,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			url: 'https://www.swapi.tech/api',
-			favorites:["papas","lays","guanchos","patitos"]
+			favorites:[]
 		},
 		actions: {
 			getCharacters: async () =>{
 				try{
+					const store = getStore()
 					const resp = await fetch(getStore().url+'/people')
 					const data = await resp.json()
-					setStore({people: data.results})
+					setStore({...store,people: data.results})
 					console.log(data)
 				} catch(error){
 					console.log("error al obtener datos de personajes con el fetch")
@@ -17,9 +18,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getPlanets: async () =>{
 				try{
+					const store = getStore()
 					const resp = await fetch(getStore().url+'/planets')
 					const data = await resp.json()
-					setStore({planets: data.results})
+					setStore({...store,planets: data.results})
 					console.log(data)
 				} catch(error){
 					console.log("error al obtener datos de planetas con el fetch")
@@ -27,9 +29,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getVehicles: async () =>{
 				try{
+					const store = getStore()
 					const resp = await fetch(getStore().url+'/vehicles')
 					const data = await resp.json()
-					setStore({vehicles: data.results})
+					setStore({...store,vehicles: data.results})
 					console.log(data)
 				} catch(error){
 					console.log("error al obtener datos de vehículos con el fetch")
@@ -37,17 +40,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getMoreInformation: async (type,uid) =>{
 				try{
+					const store = getStore()
 					const resp = await fetch(`${getStore().url}/${type}/${uid}`)
 					const data = await resp.json()
-					setStore({details: data.result})
+					setStore({...store,details: data.result})
 					console.log(data)
 				} catch(error){
 					console.log("error al obtener datos detallados")
 				}
 			},
-			putInFavorites: (uid)=>{
+			putInFavorites: (name)=>{
+				console.log(name)
 				const store = getStore()
-				return setStore({favorites:(t=>[...t,uid])})
+				setStore({...store,favorites:[...store.favorites,name]});
+				console.log(getStore())
 			},
 			deleteFavorite(uid){
 				const store = getStore()

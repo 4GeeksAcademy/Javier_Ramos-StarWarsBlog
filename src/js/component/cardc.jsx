@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/card.css";
 
 export const Cardc = ({name,uid,type}) =>{
     const { store, actions } = useContext(Context)
@@ -14,7 +13,7 @@ export const Cardc = ({name,uid,type}) =>{
 				    More information
 		        </Link>
                 <button className="btn btn-success">
-                    <span className="fa-solid fa-heart" onClick={()=>actions.putInFavorites()}></span>
+                    <span className="fa-solid fa-heart" onClick={()=>actions.putInFavorites(name)}></span>
                 </button>
             </div>
         </div>
